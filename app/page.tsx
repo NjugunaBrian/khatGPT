@@ -1,9 +1,12 @@
+import Chat from "@/components/Chat";
+import Sidebar from "@/components/sidebar";
 import Image from "next/image";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1>Chat Gpt Clone</h1>
+    <main className="min-h-screen flex w-full">
+      <Sidebar />
+      <Chat />
     </main>
   );
 }
