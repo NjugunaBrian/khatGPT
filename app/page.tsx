@@ -4,9 +4,9 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <main className="min-h-screen flex w-full">
+    <div className="min-h-screen flex w-full">
       <Sidebar />
       <Chat />
-    </main>
+    </div>
   );
 }
