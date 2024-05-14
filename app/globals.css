@@ -31,3 +31,12 @@ body {
     text-wrap: balance;
   }
 }
+div::-webkit-scrollbar {
+  width: 6px;
+  }
+  
+div::-webkit-scrollbar-track {
+-webkit-box-shadow: inset 0 0 6px rgba(128, 128, 128, 1);
+border-radius: 10px;
+}
+

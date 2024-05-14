@@ -1,11 +1,14 @@
+'use client'
+
 import React from 'react'
+import { Scrollbar } from 'react-scrollbars-custom'
 
 function Sidebar() {
     return (
-        <section className='flex flex-col w-3/12 p-7 h-full relative'>
+        <section className='flex flex-col p-7 h-full relative'>
             <div className='overflow-y-scroll h-9/12'>
                 <div>
-                    <button className='p-3 flex items-center justify-center space-x-24 rounded-md hover:bg-[#060606]'>
+                    <button className='p-2 flex items-center justify-center space-x-24 rounded-md hover:bg-[#060606]'>
                         <p className='font-bold'>New Chat</p>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
                             <path d="m5.433 13.917 1.262-3.155A4 4 0 0 1 7.58 9.42l6.92-6.918a2.121 2.121 0 0 1 3 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 0 1-.65-.65Z" />
@@ -15,7 +18,7 @@ function Sidebar() {
                 </div>
 
                 <div className='py-5'>
-                    <span className='text-gray-400 text-xs '>Today</span>
+                    <span className='text-gray-400 text-xs'>Today</span>
                     <p>Run React project Locally</p>
                 </div>
                 <div className='py-5'>
@@ -37,7 +40,7 @@ function Sidebar() {
 
             </div>
 
-            <div className='h-3/12'>
+            <div className='h-3/12 fixed bottom-0 z-50'>
 
                 <div className='flex space-x-2 hover:bg-[#060606]'>
                     <button className='rounded-full outline outline-[1px] px-2 py-0'>
