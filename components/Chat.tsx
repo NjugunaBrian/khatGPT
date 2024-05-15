@@ -1,6 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
 'use client';
 
+import Image from 'next/image';
 import React, { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/16/solid';
@@ -23,7 +23,7 @@ const actions = [
 
 function Chat() {
   return (
-    <div className='w-9/12 bg-[#060606] flex flex-col'>
+    <div className='w-9/12 h-screen bg-[#060606] flex flex-col'>
       <Popover className='relative p-3'>
         <Popover.Button className='flex items-center gap-x-1 text-2xl font-bold leading-6 text-white outline-none hover:bg-[#212121] px-2 py-3 rounded-xl'>
           ChatGPT <span className='text-gray-400'>3.5</span>
@@ -102,14 +102,52 @@ function Chat() {
         </Transition>
 
       </Popover>
-      <div className='flex items-center justify-center max-w-3xl px-10 flex-grow'>
-        <div>
-          <img src='https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FMicrosoft_account&psig=AOvVaw3o1UeNjIdDruYgxThCXfHt&ust=1715870390328000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCNC5msLxj4YDFQAAAAAdAAAAABAE' alt='' className='rounded-full object-cover' />
+      <div className='flex flex-col items-center justify-center max-w-3xl px-10 overflow-y-auto flex-grow h-full'>
+        <div className='space-x-3 flex'>
+          <div>
+            <Image src="/Kanye_West.jpg" alt=' ' className='rounded-full object-cover' width={30} height={30} />
+          </div>
+          <div className='space-y-1'>
+            <p className='font-bold'>You</p>
+            <p>
+              You are an expert Frontend developer. How do you center a div that has contents which need to use justify between them
+            </p>
+          </div>
         </div>
-        <div>
-          <p>
-            You are an expert Frontend developer. How do you center a div that has contents which need to use justify between them
-          </p>
+
+        <div className='space-x-3 flex mt-5'>
+          <div>
+            <Image src="/Green ChatGPT.png" alt=' ' className='rounded-full object-cover' width={40} height={40} />
+          </div>
+          <div className='space-y-1'>
+            <p className='font-bold'>ChatGPT</p>
+            <p>
+              To center a div element that contains contents and you want to use justify-content: space-between to space out those contents, you can use a combination of Flexbox properties. Here's how you can achieve it:
+            </p>
+          </div>
+        </div>
+        <div className='space-x-3 flex'>
+          <div>
+            <Image src="/Kanye_West.jpg" alt=' ' className='rounded-full object-cover' width={30} height={30} />
+          </div>
+          <div className='space-y-1'>
+            <p className='font-bold'>You</p>
+            <p>
+              You are an expert Frontend developer. How do you center a div that has contents which need to use justify between them
+            </p>
+          </div>
+        </div>
+
+        <div className='space-x-3 flex mt-5'>
+          <div>
+            <Image src="/Green ChatGPT.png" alt=' ' className='rounded-full object-cover' width={40} height={40} />
+          </div>
+          <div className='space-y-1'>
+            <p className='font-bold'>ChatGPT</p>
+            <p>
+              To center a div element that contains contents and you want to use justify-content: space-between to space out those contents, you can use a combination of Flexbox properties. Here's how you can achieve it:
+            </p>
+          </div>
         </div>
 
       </div>
