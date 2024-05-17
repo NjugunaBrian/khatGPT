@@ -1,12 +1,18 @@
+"use client";
+
 import Chat from "@/components/Chat";
 import Sidebar from "@/components/sidebar";
-import Image from "next/image";
+import { signOut, useSession } from "next-auth/react";
 
 export default function Home() {
-  return (
-    <div className="min-h-screen flex w-full">
-      <Sidebar />
-      <Chat />
-    </div>
+    
+  const session = useSession();
+
+
+  return (  
+      <div className="min-h-screen flex w-full">
+        <Sidebar />
+        <Chat />
+      </div>
   );
 }

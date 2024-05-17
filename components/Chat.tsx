@@ -10,29 +10,36 @@ import Navbar from './Navbar';
 function Chat() {
 
   const [value, setValue] = useState('');
+  const [searches, setSearches] = useState<string[]>([]);
 
   const handleSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
-    setValue('')
+    addSearch(value)
+    setValue(' ')
   }
+
+  const addSearch = (searches: string) => {
+    setSearches((currentSearches) => [...currentSearches, searches]) 
+  }
+
+
   return (
     <div className='w-9/12 h-screen bg-[#060606] flex flex-col'>
       <Navbar />
-      <div className='flex flex-col items-center justify-center max-w-3xl px-10 overflow-y-auto flex-grow h-full'>
-        {value ?
-          <div className='space-x-3 flex'>
+      <div className='flex flex-col max-w-fit py-5 px-20 overflow-y-auto flex-grow h-full space-y-3'>
+         {searches.map((search) => (
+          <div key={search} className='space-x-3 flex'>
             <div>
               <Image src="/Kanye_West.jpg" alt=' ' className='rounded-full object-cover' width={30} height={30} />
             </div>
             <div className='space-y-1'>
               <p className='font-bold'>You</p>
               <p>
-                {value}
+                {search}
               </p>
             </div>
           </div>
-          : ''
-        }
+        ))}  
       </div>
       <div>
         <form onSubmit={handleSubmit} className='flex items-center justify-center rounded-lg mt-auto p-5'>
