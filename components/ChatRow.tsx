@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useCollection } from "react-firebase-hooks/firestore";
-import { collection, orderBy, query } from "firebase/firestore";
+import { collection, deleteDoc, doc, orderBy, query } from "firebase/firestore";
 import { db } from "@/firebase";
 
 type Props = {
@@ -28,13 +28,19 @@ function ChatRow({id}: Props) {
 
     }, [id, pathname]);
 
+    const removeChat = async() => {
+        await deleteDoc(doc(db, "users", session?.user?.email!, "chats", id));
+        router.replace('/');
+
+    }
+
   return (
     <Link href={`/chat/${id}`} className={`flex items-center p-3 rounded-md ${active && 'bg-[#161616]'}`}>
         <p className="flex-1 inline-flex truncate">
             {messages?.docs[0]?.data().text || "New Chat"}
         </p>
         <div className="flex space-x-0">
-            <TrashIcon className="h-5 w-5" />
+            <TrashIcon onClick={removeChat}  className="h-5 w-5" />
             <ArchiveBoxIcon className="h-5 w-5"/>
         </div>
     </Link>
