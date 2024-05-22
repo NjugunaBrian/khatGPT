@@ -21,6 +21,9 @@ function Chat({ params: { id } }: Props) {
   const [searches, setSearches] = useState<string[]>([]);
   const { data: session } = useSession();
 
+  //useSWR to get model
+  const model = "gpt-3.5-turbo"
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!value) return;
@@ -42,6 +45,21 @@ function Chat({ params: { id } }: Props) {
     await addDoc(collection(db, "users", session?.user?.email!, "chats", id, "messages"),
       message
     )
+
+    await fetch('/api/askQuestion', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        value: input,
+        id,
+        model,
+        session
+      })
+    }).then(() => {
+
+    });
   }
 
   const addSearch = (searches: string) => {
