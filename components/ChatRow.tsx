@@ -35,7 +35,7 @@ function ChatRow({id}: Props) {
     }
 
   return (
-    <Link href={`/chat/${id}`} className={`flex items-center p-3 rounded-md ${active && 'bg-[#161616]'}`}>
+    <Link href={`/chat/${id}`} className={`flex items-center p-3 rounded-md hover:bg-[#161616] ${active && 'bg-[#212121]'}`}>
         <p className="flex-1 inline-flex truncate">
             {messages?.docs[0]?.data().text || "New Chat"}
         </p>
