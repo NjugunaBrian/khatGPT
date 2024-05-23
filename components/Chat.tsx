@@ -52,14 +52,12 @@ function Chat({ params: { id } }: Props) {
         'Content-type': 'application/json'
       },
       body: JSON.stringify({
-        value: input,
+        text: input,
         id,
         model,
         session
       })
-    }).then(() => {
-
-    });
+    })
   }
 
   const addSearch = (searches: string) => {
