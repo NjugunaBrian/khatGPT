@@ -4,7 +4,7 @@ import firebaseAdmin from "firebase-admin";
 import { adminDb } from "@/firebaseAdmin";
 
 type Data = {
-  answer: string;
+  answer: string | ChatMessage[];
 };
 
 export default async function Handler(
@@ -25,7 +25,7 @@ export default async function Handler(
   const response = await query(value, id, model);
 
   const message: Message = {
-    text: response.toString() || "ChatGPT cannot find an answer for that!",
+    text: response || "ChatGPT cannot find an answer for that!",
     createdAt: firebaseAdmin.firestore.Timestamp.now(),
     user: {
       _id: "ChatGPT",

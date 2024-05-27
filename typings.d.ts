@@ -1,5 +1,10 @@
+interface ChatMessage {
+    role: 'system' | 'user' | 'assistant';
+    content: string;
+}
+
 interface Message {
-    text: string;
+    text: ChatMessage[] | string;
     createdAt: admin.firestore.Timestamp;
     user: {
         _id: string;

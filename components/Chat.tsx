@@ -16,8 +16,8 @@ type Props = {
 
 
 function Chat({ params: { id } }: Props) {
-
-  const [value, setValue] = useState('');
+ 
+  const [value, setValue] = useState("");
   const [searches, setSearches] = useState<string[]>([]);
   const { data: session } = useSession();
 
@@ -28,7 +28,10 @@ function Chat({ params: { id } }: Props) {
     e.preventDefault();
     if (!value) return;
 
-    const input = value.trim();
+    const input: ChatMessage[] = [
+      { role: "system", content: "You are a helpful assistant." },
+      { role: "user", content: "What is the capital of France?" }
+    ];
     addSearch(value)
     setValue(' ')
 
