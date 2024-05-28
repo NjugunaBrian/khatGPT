@@ -21,7 +21,8 @@ function Sidebar() {
     
 
     return (
-        <div className='flex flex-col p-7 h-screen '>
+        
+        <div className='hidden md:flex flex-col md:p-7 md:h-screen '>
             <div className='overflow-y-auto flex-grow h-full'>
                 
                 <NewChat />
@@ -78,6 +79,7 @@ function Sidebar() {
             </div>
 
         </div>
+        
     )
 }
 
