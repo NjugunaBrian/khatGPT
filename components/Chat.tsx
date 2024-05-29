@@ -2,12 +2,12 @@
 
 import Image from 'next/image';
 import React, { useState } from 'react'
-import { Bars3Icon, PaperAirplaneIcon } from '@heroicons/react/24/solid';
+import { Bars3Icon, PaperAirplaneIcon, XMarkIcon } from '@heroicons/react/24/solid';
 import Navbar from './Navbar';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { useSession } from 'next-auth/react';
 import { db } from '@/firebase';
-import { Dialog } from '@headlessui/react';
+import { Dialog, DialogPanel, } from '@headlessui/react';
 import Sidebar from './sidebar';
 
 type Props = {
@@ -25,7 +25,8 @@ function Chat({ params: { id } }: Props) {
 
   //burger menu
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
+   
+  //
 
   //useSWR to get model
   const model = "gpt-3.5-turbo"
@@ -40,9 +41,10 @@ function Chat({ params: { id } }: Props) {
     ];
     addSearch(value)
     setValue(' ')
+    console.log(input);
 
     const message: Message = {
-      text: input,
+      text: value,
       createdAt: serverTimestamp(),
       user: {
         _id: session?.user?.email!,
@@ -75,7 +77,7 @@ function Chat({ params: { id } }: Props) {
 
 
   return (
-    <div className='w-full md:w-9/12 h-screen bg-[#060606] flex flex-col overflow-hidden'>
+    <div className='w-full md:w-9/12 h-screen bg-[#060606] flex flex-col flex-grow overflow-hidden'>
       <div className='flex items-center space-x-36 md:space-x-0'>
         <div className='flex lg:hidden'>
           <button
@@ -88,23 +90,33 @@ function Chat({ params: { id } }: Props) {
 
           </button>
         </div>
-        <Dialog
-          as='div'
-          className='lg:hidden'
-          open={mobileMenuOpen}
-          onClose={setMobileMenuOpen}
-        >
-          <div className='fixed inset-0 z-10' />
-          <Dialog.Panel className='fixed inset-y-0 right-0 z-10 w-full overflow-y-auto p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10'>
-            <Sidebar />
-
-          </Dialog.Panel>  
-
-
-
-        </Dialog>
         <Navbar />
       </div>
+      <Dialog
+        as='div'
+        className='lg:hidden'
+        open={mobileMenuOpen}
+        onClose={setMobileMenuOpen}
+      >
+        <div className='fixed inset-0 z-10 bg-black bg-opacity-100' />
+
+        <DialogPanel className={`fixed inset-y-0 left-0 z-10 w-3/5 transform transition-transform overflow-y-auto p-5 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10
+         ${mobileMenuOpen ? 'dialog-enter-active' : 'dialog-leave-active'}
+         ${!mobileMenuOpen ? 'dialog-leave-to' : ''}`}>
+          <button type='button' className='-my-3 -mx-3.5 rounded-md p-2.5 text-white' onClick={() => setMobileMenuOpen(false)}>
+            <span className='sr-only'>Close Menu</span>
+            <Bars3Icon className='h-6 w-6' aria-hidden='true' />
+          </button>
+          
+          <Sidebar />
+
+
+        </DialogPanel>
+
+
+
+      </Dialog>
+
       <div className='flex flex-col max-w-fit py-5 px-20 overflow-y-auto flex-grow h-full space-y-3'>
         {searches.map((search) => (
           <div key={search} className='space-x-3 flex'>

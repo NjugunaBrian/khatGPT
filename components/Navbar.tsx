@@ -20,7 +20,7 @@ const actions = [
 
 function Navbar() {
   return (
-    <Popover className='relative py-2 flex justify-center md:justify-start px-3'>
+    <Popover className='py-2 flex justify-center md:justify-start px-3'>
         <Popover.Button className='flex items-center gap-x-1 text-2xl font-bold leading-6 text-white outline-none hover:bg-[#212121] px-2 py-3 rounded-xl'>
           KhatGPT <span className='text-gray-400'>3.5</span>
           <ChevronDownIcon className='h-5 w-5 flex-none text-white' aria-hidden='true' />

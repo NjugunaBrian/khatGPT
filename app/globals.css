@@ -39,4 +39,12 @@ div::-webkit-scrollbar-track {
 -webkit-box-shadow: inset 0 0 6px rgba(128, 128, 128, 1);
 border-radius: 10px;
 }
-
+.dialog-enter, .dialog-leave-to{
+  transform: translateX(-100%);
+}
+.dialog-enter-active, .dialog-leave-active{
+  transition: transform 0.3s ease-out;
+}
+.dialog-enter-active{
+  transform: translateX(0);
+}
