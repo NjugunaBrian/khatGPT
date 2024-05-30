@@ -8,7 +8,7 @@ import { SessionProvider } from "@/components/SessionProvider";
 import Login from "@/components/Login";
 import Page from '@/app/page';
 import Chat from "@/components/Chat";
-import Sidebar from "@/components/sidebar";
+import Sidebar from "@/components/Sidebar";
 
 const roboto = Roboto({
   subsets: ["latin"],

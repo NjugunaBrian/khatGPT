@@ -8,7 +8,8 @@ import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { useSession } from 'next-auth/react';
 import { db } from '@/firebase';
 import { Dialog, DialogPanel, } from '@headlessui/react';
-import Sidebar from './sidebar';
+import Sidebar from './Sidebar';
+
 
 type Props = {
   params: {
@@ -25,7 +26,7 @@ function Chat({ params: { id } }: Props) {
 
   //burger menu
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-   
+
   //
 
   //useSWR to get model
@@ -107,8 +108,9 @@ function Chat({ params: { id } }: Props) {
             <span className='sr-only'>Close Menu</span>
             <Bars3Icon className='h-6 w-6' aria-hidden='true' />
           </button>
+
+
           
-          <Sidebar />
 
 
         </DialogPanel>
@@ -135,7 +137,7 @@ function Chat({ params: { id } }: Props) {
       <div>
         <form onSubmit={handleSubmit} className='flex items-center justify-center rounded-lg mt-auto p-5'>
           <div className='w-10/12 flex items-center justify-center bg-[#212121] px-2 rounded-xl'>
-            <input className='p-3 outline-none flex-grow bg-[#212121]' type='text' placeholder='Message KhatGPT...' value={value} onChange={(e) => setValue(e.target.value)} />
+            <input className='p-3 outline-none flex-grow bg-[#212121] placeholder:relative' type='text' placeholder='Message KhatGPT...' value={value} onChange={(e) => setValue(e.target.value)} />
             <button type='submit' disabled={!value} title='Send text' className='p-2 bg-[#333333] rounded-xl disabled:cursor-not-allowed'>
               <PaperAirplaneIcon className='h-5 w-5 -rotate-45' />
             </button>
