@@ -8,7 +8,6 @@ import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { useSession } from 'next-auth/react';
 import { db } from '@/firebase';
 import { Dialog, DialogPanel, } from '@headlessui/react';
-import Sidebar from './Sidebar';
 
 
 type Props = {
@@ -109,7 +108,7 @@ function Chat({ params: { id } }: Props) {
             <Bars3Icon className='h-6 w-6' aria-hidden='true' />
           </button>
 
-
+        
           
 
 
