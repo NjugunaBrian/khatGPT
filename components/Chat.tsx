@@ -10,14 +10,17 @@ import { db } from '@/firebase';
 import { Dialog, DialogPanel, } from '@headlessui/react';
 
 
-type Props = {
-  params: {
-    id: string
+interface Props {
+  params : {
+    ChatId: string
   }
+    
 }
 
 
-function Chat({ params: { id } }: Props) {
+function Chat({ params: { ChatId } } : Props) {
+
+  
 
   const [value, setValue] = useState("");
   const [searches, setSearches] = useState<string[]>([]);
@@ -35,13 +38,17 @@ function Chat({ params: { id } }: Props) {
     e.preventDefault();
     if (!value) return;
 
-    const input: ChatMessage[] = [
+    const input  = value
+    
+
+    {/*const input: ChatMessage[] = [
       { role: "system", content: "You are a helpful assistant." },
       { role: "user", content: "What is the capital of France?" }
-    ];
+    ];*/}
     addSearch(value)
     setValue(' ')
     console.log(input);
+    console.log(ChatId)
 
     const message: Message = {
       text: value,
@@ -53,7 +60,7 @@ function Chat({ params: { id } }: Props) {
       }
     };
 
-    await addDoc(collection(db, "users", session?.user?.email!, "chats", id, "messages"),
+    await addDoc(collection(db, "users", session?.user?.email!, "chats", ChatId, "messages"),
       message
     )
 
@@ -64,7 +71,7 @@ function Chat({ params: { id } }: Props) {
       },
       body: JSON.stringify({
         text: input,
-        id,
+        ChatId,
         model,
         session
       })

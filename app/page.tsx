@@ -10,7 +10,7 @@ export default function Home() {
   return (  
       <div className="min-h-screen flex w-full">
         <Sidebar />
-        <Chat params={{ id: ""}} />
+        <Chat params={{ ChatId: "" }}/>
       </div>
   );
 }
