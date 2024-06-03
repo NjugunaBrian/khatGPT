@@ -2,81 +2,21 @@
 
 import Image from 'next/image';
 import React, { useState } from 'react'
-import { Bars3Icon, PaperAirplaneIcon, XMarkIcon } from '@heroicons/react/24/solid';
+import { Bars3Icon } from '@heroicons/react/24/solid';
 import Navbar from './Navbar';
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
-import { useSession } from 'next-auth/react';
-import { db } from '@/firebase';
 import { Dialog, DialogPanel, } from '@headlessui/react';
 
 
-interface Props {
-  params : {
-    ChatId: string
-  }
-    
+type Props = {
+  ChatId: string;
 }
 
-
-function Chat({ params: { ChatId } } : Props) {
-
-  
-
-  const [value, setValue] = useState("");
+function Chat({ChatId}: Props) {
+    
   const [searches, setSearches] = useState<string[]>([]);
-  const { data: session } = useSession();
-
   //burger menu
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  //
-
-  //useSWR to get model
-  const model = "gpt-3.5-turbo"
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!value) return;
-
-    const input  = value
-    
-
-    {/*const input: ChatMessage[] = [
-      { role: "system", content: "You are a helpful assistant." },
-      { role: "user", content: "What is the capital of France?" }
-    ];*/}
-    addSearch(value)
-    setValue(' ')
-    console.log(input);
-    console.log(ChatId)
-
-    const message: Message = {
-      text: value,
-      createdAt: serverTimestamp(),
-      user: {
-        _id: session?.user?.email!,
-        name: session?.user?.name!,
-        avatar: session?.user?.image! || `https://ui-avatars.com/api/?name=${session?.user?.name}`,
-      }
-    };
-
-    await addDoc(collection(db, "users", session?.user?.email!, "chats", ChatId, "messages"),
-      message
-    )
-
-    await fetch('/api/askQuestion', {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json'
-      },
-      body: JSON.stringify({
-        text: input,
-        ChatId,
-        model,
-        session
-      })
-    })
-  }
 
   const addSearch = (searches: string) => {
     setSearches((currentSearches) => [...currentSearches, searches])
@@ -84,7 +24,7 @@ function Chat({ params: { ChatId } } : Props) {
 
 
   return (
-    <div className='w-full md:w-9/12 h-screen bg-[#060606] flex flex-col flex-grow overflow-hidden'>
+    <div className='flex flex-col flex-1 overflow-hidden'>
       <div className='flex items-center space-x-36 md:space-x-0'>
         <div className='flex lg:hidden'>
           <button
@@ -125,7 +65,7 @@ function Chat({ params: { ChatId } } : Props) {
 
       </Dialog>
 
-      <div className='flex flex-col max-w-fit py-5 px-20 overflow-y-auto flex-grow h-full space-y-3'>
+      <div className='flex flex-col max-w-fit py-5 px-20 overflow-y-auto flex-1 h-full space-y-3'>
         {searches.map((search) => (
           <div key={search} className='space-x-3 flex'>
             <div>
@@ -140,18 +80,8 @@ function Chat({ params: { ChatId } } : Props) {
           </div>
         ))}
       </div>
-      <div>
-        <form onSubmit={handleSubmit} className='flex items-center justify-center rounded-lg mt-auto p-5'>
-          <div className='w-10/12 flex items-center justify-center bg-[#212121] px-2 rounded-xl'>
-            <input className='p-3 outline-none flex-grow bg-[#212121] placeholder:relative' type='text' placeholder='Message KhatGPT...' value={value} onChange={(e) => setValue(e.target.value)} />
-            <button type='submit' disabled={!value} title='Send text' className='p-2 bg-[#333333] rounded-xl disabled:cursor-not-allowed'>
-              <PaperAirplaneIcon className='h-5 w-5 -rotate-45' />
-            </button>
-
-          </div>
-        </form>
-
-      </div>
+      
+      
 
     </div>
   )

@@ -1,6 +1,6 @@
 import openai from "./chatgpt";
 
-const query = async (value: ChatMessage[], id: string, model: string): Promise<string | null> => {
+const query = async (value: ChatMessage[], chatId: string, model: string): Promise<string | null> => {
 
   const res = await openai.chat.completions
     .create({

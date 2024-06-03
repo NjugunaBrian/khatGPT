@@ -1,7 +1,7 @@
 "use client";
 
-import Chat from "@/components/Chat";
 import Sidebar from "@/components/Sidebar";
+import ChatPage from "./chat/[id]/page";
 
 export default function Home() {
     
@@ -10,7 +10,9 @@ export default function Home() {
   return (  
       <div className="min-h-screen flex w-full">
         <Sidebar />
-        <Chat params={{ ChatId: "" }}/>
+        <ChatPage params={{
+        id: ""
+      }}/>
       </div>
   );
 }

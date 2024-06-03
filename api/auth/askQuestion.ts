@@ -11,18 +11,18 @@ export default async function Handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  const { value, id, model, session } = req.body;
+  const { value, ChatId, model, session } = req.body;
   if (!value) {
     res.status(400).json({ answer: "Please provide a value!" });
     return;
   }
-  if (!id) {
+  if (!ChatId ) {
     res.status(400).json({ answer: "Please provide a valid chat id" });
     return;
   }
 
   //   ChatGPT query
-  const response = await query(value, id, model);
+  const response = await query(value, ChatId, model);
 
   const message: Message = {
     text: response || "ChatGPT cannot find an answer for that!",
@@ -38,7 +38,7 @@ export default async function Handler(
     .collection("users")
     .doc(session?.user?.email)
     .collection("chats")
-    .doc(id)
+    .doc(ChatId)
     .collection("messages")
     .add(message);
 

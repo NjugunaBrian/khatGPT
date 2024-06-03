@@ -23,7 +23,7 @@ function Sidebar() {
     return (
         
         <div className='hidden md:flex flex-col md:p-7 md:h-screen '>
-            <div className='overflow-y-auto flex-1 flex-grow h-full'>
+            <div className='overflow-y-auto flex-1  h-full'>
                 
                 <NewChat />
 
