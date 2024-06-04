@@ -5,6 +5,7 @@ import {  PaperAirplaneIcon } from '@heroicons/react/24/solid';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { useSession } from 'next-auth/react';
 import { db } from '@/firebase';
+import toast from 'react-hot-toast';
 
 type Props = {
     ChatId: string;
@@ -14,31 +15,24 @@ type Props = {
 function ChatInput({ChatId}: Props) {
 
     const [value, setValue] = useState("");
-    const [searches, setSearches] = useState<string[]>([]);
     const { data: session } = useSession();
 
     //useSWR to get model
     const model = "gpt-3.5-turbo"
-
-    const addSearch = (searches: string) => {
-        setSearches((currentSearches) => [...currentSearches, searches])
-      }
-    
-
 
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (!value) return;
     
-        const input  = value.trim()
+        const input  = value.trim();
         
     
         {/*const input: ChatMessage[] = [
           { role: "system", content: "You are a helpful assistant." },
           { role: "user", content: "What is the capital of France?" }
         ];*/}
-        addSearch(value)
+        
         setValue(' ')
         console.log(input);
         console.log(ChatId)
@@ -49,13 +43,16 @@ function ChatInput({ChatId}: Props) {
           user: {
             _id: session?.user?.email!,
             name: session?.user?.name!,
-            avatar: session?.user?.image! || `https://ui-avatars.com/api/?name=${session?.user?.name}`,
+            avatar: session?.user?.image || `https://ui-avatars.com/api/?name=${session?.user?.name}`,
           }
         };
     
-        await addDoc(collection(db, "users", session?.user?.email!, "chats", ChatId, "messages"),
+        await addDoc(collection(db, "users", session?.user?.email!, "chats", ChatId),
           message
         )
+
+        //toast notification
+        const notification = toast.loading('ChatGPT is thinking... ')
     
         await fetch('/api/askQuestion', {
           method: 'POST',
@@ -69,7 +66,10 @@ function ChatInput({ChatId}: Props) {
             session
           })
         }).then(() => {
-          console.log("Successful!")
+          toast.success('ChatGPT has responded!', {
+            id: notification
+          })
+
         })
       }
 

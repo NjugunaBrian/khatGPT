@@ -1,10 +1,14 @@
 'use client';
 
-import Image from 'next/image';
 import React, { useState } from 'react'
 import { Bars3Icon } from '@heroicons/react/24/solid';
 import Navbar from './Navbar';
 import { Dialog, DialogPanel, } from '@headlessui/react';
+import { useSession } from 'next-auth/react';
+import { useCollection } from 'react-firebase-hooks/firestore';
+import { collection, orderBy, query } from 'firebase/firestore';
+import { db } from '@/firebase';
+import Message from './Message';
 
 
 type Props = {
@@ -12,15 +16,15 @@ type Props = {
 }
 
 function Chat({ChatId}: Props) {
+
+  const { data: session } = useSession();
+
+  const [messages] = useCollection(session && query(collection(db, "users", session?.user?.email!, "chats", ChatId),
+   orderBy("createdAt", "asc")))
     
-  const [searches, setSearches] = useState<string[]>([]);
-  //burger menu
+
+   //burger menu
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-
-  const addSearch = (searches: string) => {
-    setSearches((currentSearches) => [...currentSearches, searches])
-  }
 
 
   return (
@@ -65,19 +69,9 @@ function Chat({ChatId}: Props) {
 
       </Dialog>
 
-      <div className='flex flex-col max-w-fit py-5 px-20 overflow-y-auto flex-1 h-full space-y-3'>
-        {searches.map((search) => (
-          <div key={search} className='space-x-3 flex'>
-            <div>
-              <Image src="/Kanye_West.jpg" alt=' ' className='rounded-full object-cover' width={30} height={30} />
-            </div>
-            <div className='space-y-1'>
-              <p className='font-bold'>You</p>
-              <p>
-                {search}
-              </p>
-            </div>
-          </div>
+      <div className='flex-1'>
+        {messages?.docs.map((message) => (
+          <Message key={message.id} message={message.data()}  />
         ))}
       </div>
       

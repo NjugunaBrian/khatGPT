@@ -35,7 +35,7 @@ function Navbar() {
           leaveFrom='opacity-100 translate-y-0'
           leaveTo='opacity-0 translate-y-1'
         >
-          <Popover.Panel className='bg-[#161616] absolute left-3 top-14 z-10 mt-3 w-screen max-w-xs overflow-hidden rounded-lg shadow-lg ring-1 ring-gray-900/5'>
+          <Popover.Panel className='bg-[#161616] absolute left-24 md:left-72 top-14 z-10 mt-3 w-screen max-w-xs overflow-hidden rounded-lg shadow-lg ring-1 ring-gray-900/5'>
             <div className='flex items-center justify-between pt-2 pb-1 px-7 text-gray-400'>
               <p>
                 Model
