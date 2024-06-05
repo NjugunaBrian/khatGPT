@@ -15,14 +15,10 @@ function Sidebar() {
     const [chats, loading, error] = useCollection(
         session && collection(db, "users", session?.user?.email!, "chats")
     );
-
-    console.log(chats);
-
     
-
     return (
         
-        <div className='hidden md:flex flex-col md:p-7 md:h-screen '>
+        <div className='hidden md:flex flex-col md:p-7 md:h-screen'>
             <div className='overflow-y-auto flex-1  h-full'>
                 
                 <NewChat />

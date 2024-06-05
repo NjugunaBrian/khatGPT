@@ -43,13 +43,11 @@ function ChatInput({ChatId}: Props) {
           user: {
             _id: session?.user?.email!,
             name: session?.user?.name!,
-            avatar: session?.user?.image || `https://ui-avatars.com/api/?name=${session?.user?.name}`,
+            avatar: session?.user?.image! || `https://ui-avatars.com/api/?name=${session?.user?.name}`,
           }
         };
     
-        await addDoc(collection(db, "users", session?.user?.email!, "chats", ChatId),
-          message
-        )
+        await addDoc(collection(db, "users", session?.user?.email!, "chats", ChatId), message)
 
         //toast notification
         const notification = toast.loading('ChatGPT is thinking... ')
