@@ -9,8 +9,7 @@ import { useCollection } from 'react-firebase-hooks/firestore';
 import { collection, orderBy, query } from 'firebase/firestore';
 import { db } from '@/firebase';
 import Message from './Message';
-import Sidebar from './Sidebar';
-import NewChat from './NewChat';
+import BurgerMenu from './BurgerMenu';
 
 
 type Props = {
@@ -56,18 +55,13 @@ function Chat({ ChatId }: Props) {
         open={mobileMenuOpen}
         onClose={setMobileMenuOpen}
       >
-        <div className='fixed inset-0 z-10 bg-[#101010] bg-opacity-100' />
+        <div className='absolute inset-y-0 left-0 w-64 z-10 bg-[#101010]' />
 
-        <DialogPanel className={`fixed inset-y-0 left-0 z-10  transform transition-transform overflow-y-auto p-5 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10
+        <DialogPanel className={`fixed inset-y-0 left-0 z-10  transform transition-transform overflow-y-auto px-5 py-2 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10
          ${mobileMenuOpen ? 'dialog-enter-active' : 'dialog-leave-active'}
          ${!mobileMenuOpen ? 'dialog-leave-to' : ''}`}>
-          <button type='button' className='-my-3 -mx-3.5 rounded-md p-2.5 text-white' onClick={() => setMobileMenuOpen(false)}>
-            <span className='sr-only'>Close Menu</span>
-            <Bars3Icon className='h-6 w-6' aria-hidden='true' />
-
-            
-          </button>
           
+          <BurgerMenu />
 
         </DialogPanel>
 
