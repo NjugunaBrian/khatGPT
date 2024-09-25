@@ -46,7 +46,7 @@ function Chat({ ChatId }: Props) {
         <Navbar />
         <div onClick={() => signOut()} className='flex space-x-2 hover:bg-[#101010] py-1 px-1 rounded-lg md:hidden'>
           <button className='rounded-full px-1 py-1'>
-            <Image src={session?.user?.image!} alt='Profile pic' height={7} width={7} className='rounded-full cursor-pointer' />
+            <Image src={session?.user?.image!} alt='Profile pic' width={7} height={7} className='rounded-full cursor-pointer' />
           </button>
         </div>
       </div>
